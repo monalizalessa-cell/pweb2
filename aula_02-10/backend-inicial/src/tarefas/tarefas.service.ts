@@ -9,13 +9,15 @@ import { Tarefa } from './entities/tarefa.entity';
 export class TarefasService {
   // "Banco de dados" em memória (por enquanto). Some ao reiniciar o servidor.
   private tarefas: Tarefa[] = [
-    { id: 1, titulo: 'Estudar NestJS', descricao: 'Módulos, controllers e services', concluida: false },
+    { id: 1, titulo: 'Estudar NestJS', descricao: 'Módulos, controllers e services', concluida: false, projetoId: 1 },
     { id: 2, titulo: 'Preparar a aula de hoje', concluida: true },
   ];
   private proximoId = 3;
 
-  findAll(): Tarefa[] {
-    return this.tarefas;
+  // Se projetoId for informado, devolve só as tarefas daquele projeto.
+  findAll(projetoId?: number): Tarefa[] {
+    if (projetoId === undefined) return this.tarefas;
+    return this.tarefas.filter((t) => t.projetoId === projetoId);
   }
 
   findOne(id: number): Tarefa {
@@ -33,6 +35,7 @@ export class TarefasService {
       titulo: dto.titulo,
       descricao: dto.descricao,
       concluida: false,
+      projetoId: dto.projetoId,
     };
     this.tarefas.push(nova);
     return nova;
