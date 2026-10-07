@@ -15,6 +15,8 @@
 **2) Mensagens personalizadas**
 - Todos os validadores de `CreateProjetoDto` e do `projetoId` usam `{ message: '...' }`.
   A mensagem da cor lista as opções válidas.
+   
+   
   **3) Ajuste no main.ts**
 - Habilitei o ValidationPipe global (whitelist, forbidNonWhitelisted e transform),
   que estava comentado no backend-inicial. Sem ele os DTOs não validavam.
